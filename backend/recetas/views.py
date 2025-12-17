@@ -90,7 +90,7 @@ class Class2(APIView):
             return ResponseHandler.error(message="El campo categoria es obligatorio")
         
         try:
-            categoria = Categoria.objects.filter(pk=request.data["categoria_id"]).get()
+            categoria = Categoria.objects.filter(pk=request.data["categoria_id"]).get() 
         except Categoria.DoesNotExist:
             return ResponseHandler.error(message="La categoria no existe")
         

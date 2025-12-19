@@ -105,3 +105,12 @@ class Class2(APIView):
             return ResponseHandler.success(message="Receta actualizada correctamente")
         except Exception as e:
             return ResponseHandler.error(message="Error al actualizar la receta", error=str(e))
+    
+    def delete(self, request, id):
+        try:
+            data = Receta.objects.filter(id=id).get()
+            os.remove(f'./uploads/recetas/{data.foto}')
+            Receta.objects.filter(id=id).delete()
+            return ResponseHandler.success(message="Receta eliminada correctamente")
+        except Receta.DoesNotExist:
+            return ResponseHandler.error(message="Receta no encontrada")
